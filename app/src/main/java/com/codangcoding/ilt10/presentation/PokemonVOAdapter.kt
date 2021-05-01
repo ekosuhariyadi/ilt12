@@ -2,7 +2,7 @@ package com.codangcoding.ilt10.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -12,7 +12,7 @@ import com.codangcoding.ilt10.presentation.model.PokemonVO
 
 class PokemonVOAdapter(
     private val clickHandler: (PokemonVO) -> Unit
-) : PagedListAdapter<PokemonVO, PokemonVOAdapter.ViewHolder>(
+) : PagingDataAdapter<PokemonVO, PokemonVOAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<PokemonVO>() {
         override fun areItemsTheSame(oldItem: PokemonVO, newItem: PokemonVO): Boolean {
             return oldItem.name == newItem.name

@@ -11,8 +11,8 @@ import com.codangcoding.ilt10.data.db.entity.PokemonMetaEntity
 
 @Database(
     entities = [
-        PokemonMetaEntity::class,
         PokemonEntity::class,
+        PokemonMetaEntity::class,
     ],
     version = 1
 )

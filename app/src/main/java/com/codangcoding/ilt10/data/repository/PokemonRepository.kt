@@ -1,9 +1,9 @@
 package com.codangcoding.ilt10.data.repository
 
-import com.codangcoding.ilt10.data.paging.PokemonDataSourceFactory
+import androidx.paging.Pager
+import com.codangcoding.ilt10.data.db.entity.PokemonEntity
 
 interface PokemonRepository {
 
-    fun getPokemonDataSourceFactory(): PokemonDataSourceFactory
-
+    fun getPokemonDataPager(): Pager<Int, PokemonEntity>
 }

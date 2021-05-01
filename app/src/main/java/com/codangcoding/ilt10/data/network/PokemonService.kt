@@ -9,7 +9,7 @@ interface PokemonService {
 
     @GET("pokemon")
     suspend fun getPokemonList(
-        @Query("offset") offset: Int = 0,
-        @Query("limit") limit: Int = 20
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int
     ): Pagination<PokemonResponse>
 }

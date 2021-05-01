@@ -10,8 +10,8 @@ import com.codangcoding.ilt10.data.db.entity.PokemonMetaEntity
 interface PokemonMetaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(meta: PokemonMetaEntity)
+    suspend fun insert(meta: PokemonMetaEntity)
 
     @Query("SELECT * FROM pokemon_meta")
-    fun meta(): PokemonMetaEntity
+    suspend fun meta(): PokemonMetaEntity?
 }
