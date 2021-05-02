@@ -8,7 +8,7 @@ import androidx.room.withTransaction
 import com.codangcoding.ilt10.data.db.PokemonDb
 import com.codangcoding.ilt10.data.db.entity.PokemonEntity
 import com.codangcoding.ilt10.data.db.entity.PokemonMetaEntity
-import com.codangcoding.ilt10.data.network.PokemonService
+import com.codangcoding.ilt10.data.network.service.PokemonService
 import retrofit2.HttpException
 import java.io.IOException
 

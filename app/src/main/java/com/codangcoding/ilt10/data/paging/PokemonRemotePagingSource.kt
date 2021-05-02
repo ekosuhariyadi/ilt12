@@ -3,7 +3,7 @@ package com.codangcoding.ilt10.data.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.codangcoding.ilt10.data.db.entity.PokemonEntity
-import com.codangcoding.ilt10.data.network.PokemonService
+import com.codangcoding.ilt10.data.network.service.PokemonService
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,5 +1,6 @@
 package com.codangcoding.ilt10.data.network
 
+import com.codangcoding.ilt10.data.network.service.PokemonService
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper

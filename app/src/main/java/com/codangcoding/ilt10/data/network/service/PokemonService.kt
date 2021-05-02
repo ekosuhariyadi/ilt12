@@ -1,4 +1,4 @@
-package com.codangcoding.ilt10.data.network
+package com.codangcoding.ilt10.data.network.service
 
 import com.codangcoding.ilt10.data.network.dto.Pagination
 import com.codangcoding.ilt10.data.network.dto.PokemonResponse
