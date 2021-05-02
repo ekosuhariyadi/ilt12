@@ -10,6 +10,7 @@ import com.codangcoding.ilt10.data.db.PokemonDb
 import com.codangcoding.ilt10.data.db.entity.PokemonEntity
 import com.codangcoding.ilt10.data.network.PokemonApi
 import com.codangcoding.ilt10.data.paging.PokemonRemoteMediator
+import com.codangcoding.ilt10.data.paging.PokemonRemotePagingSource
 import com.codangcoding.ilt10.data.repository.PokemonRepository
 import com.codangcoding.ilt10.databinding.ActivityMainBinding
 
@@ -30,6 +31,14 @@ class MainActivity : AppCompatActivity() {
                         PokemonDb.INSTANCE.pokemonDao().pokemonListByPaging()
                     }
                 }
+
+                override fun getRemotePokemonDataPager(): Pager<Int, PokemonEntity> {
+                    return Pager(
+                        config = PagingConfig(pageSize = 20)
+                    ) {
+                        PokemonRemotePagingSource(PokemonApi.pokemonService)
+                    }
+                }
             }
         )
     }
@@ -44,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             rvPokemon.adapter = adapter
         }
 
-        viewModel.pokemonList.observe(this@MainActivity) { pokemonList ->
+        viewModel.remotePokemonList.observe(this@MainActivity) { pokemonList ->
             adapter.submitData(lifecycle, pokemonList)
         }
     }

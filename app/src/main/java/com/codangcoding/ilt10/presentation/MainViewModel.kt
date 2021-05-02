@@ -20,4 +20,11 @@ class MainViewModel(
         }
         .cachedIn(viewModelScope)
 
+    val remotePokemonList = repository.getRemotePokemonDataPager()
+        .liveData
+        .map { pagingData ->
+            pagingData.map { PokemonVO(it.name, it.url) }
+        }
+        .cachedIn(viewModelScope)
+
 }

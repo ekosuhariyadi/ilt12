@@ -6,4 +6,6 @@ import com.codangcoding.ilt10.data.db.entity.PokemonEntity
 interface PokemonRepository {
 
     fun getPokemonDataPager(): Pager<Int, PokemonEntity>
+
+    fun getRemotePokemonDataPager(): Pager<Int, PokemonEntity>
 }
