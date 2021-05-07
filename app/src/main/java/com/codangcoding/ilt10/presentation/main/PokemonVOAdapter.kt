@@ -1,4 +1,4 @@
-package com.codangcoding.ilt10.presentation
+package com.codangcoding.ilt10.presentation.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

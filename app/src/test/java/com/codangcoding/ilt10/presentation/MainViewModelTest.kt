@@ -6,9 +6,9 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.codangcoding.ilt10.data.repository.PokemonRepository
 import com.codangcoding.ilt10.data.repository.model.Pokemon
+import com.codangcoding.ilt10.presentation.main.MainViewModel
 import com.codangcoding.ilt10.presentation.model.PokemonVO
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
 import kotlinx.coroutines.ExperimentalCoroutinesApi

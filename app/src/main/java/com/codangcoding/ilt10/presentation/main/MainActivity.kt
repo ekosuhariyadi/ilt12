@@ -1,4 +1,4 @@
-package com.codangcoding.ilt10.presentation
+package com.codangcoding.ilt10.presentation.main
 
 import android.os.Bundle
 import androidx.activity.viewModels

@@ -1,4 +1,4 @@
-package com.codangcoding.ilt10.presentation
+package com.codangcoding.ilt10.presentation.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
