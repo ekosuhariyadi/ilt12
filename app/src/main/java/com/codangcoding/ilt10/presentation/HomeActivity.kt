@@ -7,6 +7,7 @@ import androidx.paging.ExperimentalPagingApi
 import com.codangcoding.ilt10.databinding.ActivityHomeBinding
 import com.codangcoding.ilt10.presentation.login.LoginActivity
 import com.codangcoding.ilt10.presentation.main.MainActivity
+import com.codangcoding.ilt10.presentation.search.SearchPokemonActivity
 
 @ExperimentalPagingApi
 class HomeActivity : AppCompatActivity() {
@@ -30,7 +31,8 @@ class HomeActivity : AppCompatActivity() {
             }
 
             btnSearch.setOnClickListener {
-
+                val intent = Intent(this@HomeActivity, SearchPokemonActivity::class.java)
+                startActivity(intent)
             }
         }
     }
