@@ -1,12 +1,7 @@
 package com.codangcoding.ilt10.presentation.search
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
-import androidx.paging.liveData
-import androidx.paging.map
-import com.codangcoding.ilt10.data.repository.PokemonRepository
 import com.codangcoding.ilt10.data.repository.SearchPokemonRepository
 import com.codangcoding.ilt10.presentation.model.PokemonVO
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,16 +14,28 @@ class SearchViewModel(
     private val repository: SearchPokemonRepository
 ) : ViewModel() {
 
-    private val _pokemonList = MutableStateFlow<List<PokemonVO>>(emptyList())
-    val pokemonList: StateFlow<List<PokemonVO>> = _pokemonList
+    private val _stateFlow = MutableStateFlow<SearchUIState>(SearchUIState.None)
+    val stateFlow: StateFlow<SearchUIState> = _stateFlow
 
     fun search(name: String) {
         viewModelScope.launch {
+            _stateFlow.value = SearchUIState.Loading
             repository.getPokemonByName(name)
                 .map { list -> list.map { PokemonVO(it.name, it.url) } }
                 .collect { pokemons ->
-                    _pokemonList.value = pokemons
+                    _stateFlow.value = if (pokemons.isNotEmpty())
+                        SearchUIState.Success(pokemons)
+                    else
+                        SearchUIState.NotFound
                 }
         }
     }
+}
+
+sealed class SearchUIState {
+
+    object None : SearchUIState()
+    object Loading : SearchUIState()
+    object NotFound : SearchUIState()
+    class Success(val list: List<PokemonVO>) : SearchUIState()
 }

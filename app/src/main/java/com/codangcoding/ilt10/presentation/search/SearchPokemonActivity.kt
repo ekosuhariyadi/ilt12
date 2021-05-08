@@ -1,6 +1,7 @@
 package com.codangcoding.ilt10.presentation.search
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
@@ -36,15 +37,29 @@ class SearchPokemonActivity : AppCompatActivity() {
                 .skipInitialValue()
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .filter { it.length >= 3 }
-                .subscribe { name -> viewModel.search(name.toString()) }
+                .subscribe { name ->
+                    viewModel.search(name.toString())
+                }
                 .let { disposableBag.add(it) }
 
             val adapter = SearchPokemonVOAdapter {}
             rvPokemon.adapter = adapter
-            viewModel.pokemonList
-                .asLiveData().observe(this@SearchPokemonActivity, { pokemons ->
-                    adapter.submitList(pokemons)
-                })
+
+            viewModel.stateFlow.asLiveData()
+                .observe(this@SearchPokemonActivity) { uiState ->
+                    loading.visibility = View.GONE
+                    when (uiState) {
+                        is SearchUIState.Success -> adapter.submitList(uiState.list)
+                        is SearchUIState.Loading -> {
+                            notFound.visibility = View.GONE
+                            loading.visibility = View.VISIBLE
+                        }
+                        is SearchUIState.NotFound -> notFound.visibility = View.VISIBLE
+                        else -> {
+                            // no-op
+                        }
+                    }
+                }
         }
     }
 
