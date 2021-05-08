@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ilt10</string>
+    <string name="pokemon">Pokemon</string>
+    <string name="login">Login</string>
+    <string name="dimana_kamu">Dimana kamu?</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
