@@ -12,7 +12,7 @@ import com.codangcoding.ilt10.data.network.service.PokemonService
 import retrofit2.HttpException
 import java.io.IOException
 
-@OptIn(ExperimentalPagingApi::class)
+@ExperimentalPagingApi
 class PokemonRemoteMediator(
     private val db: PokemonDb,
     private val service: PokemonService

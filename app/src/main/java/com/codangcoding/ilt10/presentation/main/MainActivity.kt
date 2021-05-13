@@ -14,9 +14,9 @@ import com.codangcoding.ilt10.data.paging.PokemonRemotePagingSource
 import com.codangcoding.ilt10.data.repository.PokemonRepository
 import com.codangcoding.ilt10.databinding.ActivityMainBinding
 
-@ExperimentalPagingApi
 class MainActivity : AppCompatActivity() {
 
+    @ExperimentalPagingApi
     private val viewModel by viewModels<MainViewModel> {
         MainViewModelFactory(
             object : PokemonRepository {
@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    @ExperimentalPagingApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)

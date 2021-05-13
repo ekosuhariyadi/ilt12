@@ -2,14 +2,15 @@ package com.codangcoding.ilt10.presentation.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.codangcoding.ilt10.databinding.ActivityLoginBinding
-import com.jakewharton.rxbinding4.widget.textChanges
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.disposables.CompositeDisposable
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import reactivecircus.flowbinding.android.widget.textChanges
 
 class LoginActivity : AppCompatActivity() {
-
-    private val disposableBag = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,20 +18,20 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         with(binding) {
-            Observable.combineLatest(
-                etUsername.textChanges().skipInitialValue().map(CharSequence::toString),
-                etPassword.textChanges().skipInitialValue().map(CharSequence::toString),
-                { username, password ->
+            etUsername.textChanges()
+                .skipInitialValue()
+                .map(CharSequence::toString)
+                .combine(
+                    etPassword.textChanges()
+                        .skipInitialValue()
+                        .map(CharSequence::toString)
+                ) { username, password ->
                     username.isNotEmpty() && password.isNotEmpty()
                 }
-            ).subscribe { enabled ->
-                btnLogin.isEnabled = enabled
-            }.let { disposableBag.add(it) }
+                .onEach { enabled ->
+                    btnLogin.isEnabled = enabled
+                }
+                .launchIn(lifecycleScope)
         }
-    }
-
-    override fun onDestroy() {
-        disposableBag.dispose()
-        super.onDestroy()
     }
 }

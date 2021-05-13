@@ -3,13 +3,11 @@ package com.codangcoding.ilt10.presentation
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.paging.ExperimentalPagingApi
 import com.codangcoding.ilt10.databinding.ActivityHomeBinding
 import com.codangcoding.ilt10.presentation.login.LoginActivity
 import com.codangcoding.ilt10.presentation.main.MainActivity
 import com.codangcoding.ilt10.presentation.search.SearchPokemonActivity
 
-@ExperimentalPagingApi
 class HomeActivity : AppCompatActivity() {
 
 

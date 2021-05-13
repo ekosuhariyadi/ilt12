@@ -5,18 +5,19 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import com.codangcoding.ilt10.data.db.PokemonDb
 import com.codangcoding.ilt10.data.db.entity.PokemonEntity
 import com.codangcoding.ilt10.data.repository.SearchPokemonRepository
 import com.codangcoding.ilt10.databinding.ActivitySearchBinding
-import com.jakewharton.rxbinding4.widget.textChanges
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import kotlinx.coroutines.flow.Flow
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
+import reactivecircus.flowbinding.android.widget.textChanges
+import kotlin.time.DurationUnit
+import kotlin.time.ExperimentalTime
+import kotlin.time.toDuration
 
 class SearchPokemonActivity : AppCompatActivity() {
-
-    private val disposableBag = CompositeDisposable()
 
     private val viewModel by viewModels<SearchViewModel> {
         SearchViewModelFactory(object : SearchPokemonRepository {
@@ -27,6 +28,8 @@ class SearchPokemonActivity : AppCompatActivity() {
         })
     }
 
+    @FlowPreview
+    @ExperimentalTime
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -35,12 +38,12 @@ class SearchPokemonActivity : AppCompatActivity() {
         with(binding) {
             etKeyword.textChanges()
                 .skipInitialValue()
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(500.toDuration(DurationUnit.MILLISECONDS))
                 .filter { it.length >= 3 }
-                .subscribe { name ->
+                .onEach { name ->
                     viewModel.search(name.toString())
                 }
-                .let { disposableBag.add(it) }
+                .launchIn(lifecycleScope)
 
             val adapter = SearchPokemonVOAdapter {}
             rvPokemon.adapter = adapter
@@ -61,10 +64,5 @@ class SearchPokemonActivity : AppCompatActivity() {
                     }
                 }
         }
-    }
-
-    override fun onDestroy() {
-        disposableBag.dispose()
-        super.onDestroy()
     }
 }
