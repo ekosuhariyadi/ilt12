@@ -36,17 +36,22 @@ class PokemonRemoteMediator(
                 LoadType.APPEND -> {
                     val totalSize = db.withTransaction {
                         metaDao.meta()?.totalPokemon
-                    } ?: 1
-                    val currentSize = db.withTransaction {
-                        pokemonDao.count()
                     }
 
-                    if (currentSize == totalSize)
-                        return MediatorResult.Success(endOfPaginationReached = true)
+                    if (totalSize == null) {
+                        0
+                    } else {
+                        val currentSize = db.withTransaction {
+                            pokemonDao.count()
+                        }
 
-                    currentSize + 1
+                        if (currentSize == totalSize)
+                            return MediatorResult.Success(endOfPaginationReached = true)
+
+                        currentSize + 1
+                    }
                 }
-            } ?: 1
+            } ?: 0
 
             val response = service.getPokemonList(loadKey, state.config.pageSize)
 

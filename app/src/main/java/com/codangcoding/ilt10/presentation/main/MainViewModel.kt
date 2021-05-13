@@ -8,8 +8,11 @@ import androidx.paging.liveData
 import androidx.paging.map
 import com.codangcoding.ilt10.data.repository.PokemonRepository
 import com.codangcoding.ilt10.presentation.model.PokemonVO
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     repository: PokemonRepository
 ) : ViewModel() {
 

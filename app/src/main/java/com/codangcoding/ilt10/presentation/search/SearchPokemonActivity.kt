@@ -6,10 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
-import com.codangcoding.ilt10.data.db.PokemonDb
-import com.codangcoding.ilt10.data.db.entity.PokemonEntity
-import com.codangcoding.ilt10.data.repository.SearchPokemonRepository
 import com.codangcoding.ilt10.databinding.ActivitySearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import reactivecircus.flowbinding.android.widget.textChanges
@@ -17,16 +15,10 @@ import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.toDuration
 
+@AndroidEntryPoint
 class SearchPokemonActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<SearchViewModel> {
-        SearchViewModelFactory(object : SearchPokemonRepository {
-
-            override fun getPokemonByName(name: String): Flow<List<PokemonEntity>> {
-                return PokemonDb.INSTANCE.pokemonDao().pokemonListByName("%$name%")
-            }
-        })
-    }
+    private val viewModel by viewModels<SearchViewModel>()
 
     @FlowPreview
     @ExperimentalTime
