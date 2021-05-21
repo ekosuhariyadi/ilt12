@@ -118,9 +118,9 @@ sonarqube {
 
     properties {
         property "sonar.sources", "src/main/java"
-        property "sonar.junit.reportPaths", "${buildDir}/test-results/testDebugUnitTest"
+        property "sonar.junit.reportPaths", "${project.buildDir}/test-results/testDebugUnitTest"
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.coverage.exclusions", "${jacocoExclusions.join(",")}"
-        property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
     }
 }
