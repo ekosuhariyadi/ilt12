@@ -2,7 +2,20 @@
 **/*Activity*.*
 **/*Fragment*.*
 **/*Adapter*.*
+**/*App.*
 
 # Dagger DI
 **/*Component*.*
 **/*Module*.*
+
+# DTO
+**/dto/*.*
+
+# Room
+**/entity/*.*
+**/PokemonDb.*
+
+# Special Case, do not know how to test
+**/DefaultPokemonRepository.*
+**/PokemonRemoteMediator.*
+**/PokemonRemotePagingSource.*
