@@ -17,5 +17,5 @@
 
 # Special Case, do not know how to test
 **/DefaultPokemonRepository.*
-**/PokemonRemoteMediator.*
+**/PokemonRemoteMediator*.*
 **/PokemonRemotePagingSource.*
