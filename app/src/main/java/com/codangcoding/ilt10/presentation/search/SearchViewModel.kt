@@ -40,5 +40,5 @@ sealed class SearchUIState {
     object None : SearchUIState()
     object Loading : SearchUIState()
     object NotFound : SearchUIState()
-    class Success(val list: List<PokemonVO>) : SearchUIState()
+    data class Success(val list: List<PokemonVO>) : SearchUIState()
 }
