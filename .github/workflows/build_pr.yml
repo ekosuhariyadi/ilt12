@@ -1,8 +1,7 @@
 name: Build
 on:
-  push:
-    branches:
-      - cicd
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 jobs:
   build:
     name: Build
@@ -38,7 +37,7 @@ jobs:
         id: qualitygate
         uses: fjogeleit/http-request-action@master
         with:
-          url: 'https://sonarcloud.io/api/qualitygates/project_status?projectKey=bangkit2021&branch=cicd'
+          url: 'https://sonarcloud.io/api/qualitygates/project_status?projectKey=bangkit2021&pullRequest=${{ github.event.number }}'
           method: 'GET'
           username: ${{ secrets.SONAR_TOKEN }}
       - name: Gate Check
