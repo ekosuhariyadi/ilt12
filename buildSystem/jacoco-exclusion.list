@@ -1,0 +1,8 @@
+# extending Android Framework
+**/*Activity*.*
+**/*Fragment*.*
+**/*Adapter*.*
+
+# Dagger DI
+**/*Component*.*
+**/*Module*.*
